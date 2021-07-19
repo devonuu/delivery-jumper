@@ -25,6 +25,6 @@
 * 개발 중 발생하는 이슈와 버그에 대해 원인을 분석하고 해결방법을 팀과 공유하여 함께 성장할 수 있는 문화를 추구합니다.
 
 ## Wiki
-* 해당 프로젝트의 상세 정보는 [Wiki](https://github.com/devonuu/delivery-jumper/wiki)에서 확인 할 수 있습니다.
+* 해당 프로젝트의 상세 정보는 [Wiki](https://github.com/f-lab-edu/delivery-jumper/wiki)에서 확인 할 수 있습니다.
 
 ## 이슈 트래킹
