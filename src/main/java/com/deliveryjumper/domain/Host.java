@@ -18,7 +18,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 public class Host extends Member{
 
+  public Host(String name, String loginId, String picture, Role role) {
+    super(name, loginId, picture, role);
+  }
 }
