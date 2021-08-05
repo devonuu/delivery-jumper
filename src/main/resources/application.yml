@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: DELIVERY-JUMPER
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+      dialect: org.hibernate.dialect.MySQL8InnoDBDialect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: deliveryJumperUser
+    password: deliveryJumperUser!
+    url: jdbc:mysql://localhost:3306/delivery_jumper
+  redis:
+    host: localhost
+    port: 6379
+    password: ''
+    session:
+      store-type: redis
+      redis:
+        namespace: spring:session
+      hazelcast:
+        flush-mode: on_save
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 60000
