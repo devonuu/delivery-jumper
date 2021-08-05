@@ -1,5 +1,6 @@
 package com.deliveryjumper.domain;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -10,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -28,18 +31,47 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 @DiscriminatorColumn
-public abstract class Member {
+public class Member extends BaseTimeEntity{
     @Id
     @GeneratedValue
     private Long memberId;
-    private String loginId;
+    private String email;
     private String password;
+    private String name;
+    private String picture;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @Embedded
     private Address address;
 
     @Enumerated(EnumType.STRING)
     private MemberStatus memberStatus;
+
+    @Builder
+    public Member(String name, String email, String picture, Role role){
+        this.name = name;
+        this.email = email;
+        this.picture = picture;
+        this.role = role;
+
+    }
+
+    public Member update(String name, String picture){
+        this.name = name;
+        this.picture = picture;
+
+        return this;
+    }
+
+    public String getRoleKey(){
+
+        return this.role.getKey();
+
+    }
+
 }

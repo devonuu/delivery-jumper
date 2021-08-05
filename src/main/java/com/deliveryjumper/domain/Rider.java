@@ -19,10 +19,14 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 public class Rider extends Member{
 
     @Enumerated(EnumType.STRING)
     private RiderStatus riderStatus; //라이더 출근 정보
+
+    public Rider(String name, String loginId, String picture, Role role) {
+        super(name, loginId, picture, role);
+    }
 }
 

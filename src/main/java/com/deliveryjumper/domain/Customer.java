@@ -2,6 +2,7 @@ package com.deliveryjumper.domain;
 
 import javax.persistence.Entity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 public class Customer extends Member{
+
+  public Customer(String name, String loginId, String picture, Role role) {
+    super(name, loginId, picture, role);
+  }
 }
