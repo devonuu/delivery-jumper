@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
 @SpringBootApplication
-@ComponentScan({"com.ygdad"})
 public class DeliveryJumperApplication {
 
 	public static void main(String[] args) {
