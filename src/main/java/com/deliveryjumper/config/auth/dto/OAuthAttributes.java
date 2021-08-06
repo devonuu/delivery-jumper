@@ -44,7 +44,6 @@ public class OAuthAttributes {
             .build();
     }
 
-
     public Member toEntity() {
         return new Member.Builder()
             .email(email)

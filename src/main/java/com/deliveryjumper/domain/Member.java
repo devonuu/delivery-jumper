@@ -1,20 +1,12 @@
 package com.deliveryjumper.domain;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Transient;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,9 +25,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member extends BaseTimeEntity{
     @Id
     @GeneratedValue
@@ -59,14 +50,6 @@ public class Member extends BaseTimeEntity{
         this.picture = picture;
         return this;
     }
-
-/*    *//**
-     * spring security에서 사용될 권한 정보를 가져오기 위해 DiscriminatorValue값을 가져온다.
-     *//*
-    @Transient //
-    public String getDecriminatorValue() {
-        return this.getClass().getAnnotation(DiscriminatorValue.class).value();
-    }*/
 
     public void encodingPassword(String password){
         this.password = password;
