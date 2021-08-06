@@ -34,7 +34,7 @@ public class Store {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
-    private Host host;
+    private Member member;
 
     private String storeName;
 

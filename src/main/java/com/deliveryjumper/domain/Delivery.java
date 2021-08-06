@@ -32,7 +32,7 @@ public class Delivery {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
-    private Rider rider; // 배달 라이더 id
+    private Member member; // 배달 라이더 id
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "delivery")
     private Order order;  // 배달 대상 주문 id

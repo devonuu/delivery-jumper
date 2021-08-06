@@ -38,7 +38,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
-    private Customer customer;  // 배달의 대상이 되는 사용자 아이디
+    private Member member;  // 배달의 대상이 되는 사용자 아이디
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeId")

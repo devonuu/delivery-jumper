@@ -1,17 +1,12 @@
 package com.deliveryjumper.domain;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +23,10 @@ import lombok.Setter;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
-@EqualsAndHashCode(callSuper=false)
-@DiscriminatorColumn
+@EqualsAndHashCode
+@NoArgsConstructor
 public class Member extends BaseTimeEntity{
     @Id
     @GeneratedValue
@@ -43,7 +37,6 @@ public class Member extends BaseTimeEntity{
     private String picture;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Role role;
 
     @Embedded
@@ -52,26 +45,65 @@ public class Member extends BaseTimeEntity{
     @Enumerated(EnumType.STRING)
     private MemberStatus memberStatus;
 
-    @Builder
-    public Member(String name, String email, String picture, Role role){
-        this.name = name;
-        this.email = email;
-        this.picture = picture;
-        this.role = role;
-
-    }
-
     public Member update(String name, String picture){
         this.name = name;
         this.picture = picture;
-
         return this;
     }
 
-    public String getRoleKey(){
-
-        return this.role.getKey();
-
+    public void encodingPassword(String password){
+        this.password = password;
     }
 
+    public static class Builder{
+        private String email;
+        private Role role;
+        private String password;
+        private String name = "";
+        private String picture = "";
+        private Address address = null;
+
+        public Builder email(String email){
+            this.email = email;
+            return this;
+        }
+
+        public Builder role(Role role){
+            this.role = role;
+            return this;
+        }
+
+        public Builder name(String name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder picture(String picture){
+            this.picture = picture;
+            return this;
+        }
+
+        public Builder address(Address address){
+            this.address = address;
+            return this;
+        }
+
+        public Builder password(String password){
+            this.password = password;
+            return this;
+        }
+
+        public Member build(){
+            return new Member(this);
+        }
+    }
+
+    private Member(Builder builder){
+        email = builder.email;
+        password = builder.password;
+        name = builder.name;
+        picture = builder.picture;
+        address = builder.address;
+        role = builder.role;
+    }
 }
