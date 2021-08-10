@@ -1,5 +1,6 @@
 package com.deliveryjumper.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -23,11 +26,13 @@ import lombok.Setter;
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
 @EqualsAndHashCode
+@NoArgsConstructor
 public class OrderItem {
 
     @Id
     @GeneratedValue
-    private Long orderItemId;
+    @Column(name = "order_item_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderId")
@@ -37,7 +42,48 @@ public class OrderItem {
     @JoinColumn(name = "itemId")
     private Item item;
 
-    private String title;
     private int orderItemQuantity;
     private double orderItemPrice;
+
+    public OrderItem(Builder builder){
+        id = builder.orderItemId;
+        order = builder.order;
+        item = builder.item;
+        orderItemQuantity = builder.orderItemQuantity;
+        orderItemPrice = builder.orderItemPrice;
+    }
+
+    public static class Builder{
+        private Long orderItemId;
+        private Order order;
+        private Item item;
+        private int orderItemQuantity;
+        private double orderItemPrice;
+
+        public Builder orderItemId(Long orderItemId){
+            this.orderItemId = orderItemId;
+            return this;
+        }
+
+        public Builder order(Order order){
+            this.order = order;
+            return this;
+        }
+        public Builder item(Item item){
+            this.item = item;
+            return this;
+        }
+        public Builder orderItemQuantity(int orderItemQuantity){
+            this.orderItemQuantity = orderItemQuantity;
+            return this;
+        }
+        public Builder orderItemPrice(double orderItemPrice){
+            this.orderItemPrice = orderItemPrice;
+            return this;
+        }
+
+        public OrderItem build(){
+            return new OrderItem(this);
+        }
+    }
 }

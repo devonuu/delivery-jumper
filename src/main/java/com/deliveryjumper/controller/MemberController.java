@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +33,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/join")
-    public CreateResponse join(@RequestBody @Valid CreateRequest request){
+    public ResponseEntity<MemberInfo> join(@RequestBody @Valid CreateRequest request){
         Member member = new Member.Builder()
             .email(request.email)
             .role(Role.ROLE_CUSTOMER)
@@ -41,13 +43,15 @@ public class MemberController {
             .address(request.address)
             .build();
         memberService.join(member);
-        return new CreateResponse(member);
+        MemberInfo result = new MemberInfo(member);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/member/{id}")
-    public MemberInfo findMemberById(@PathVariable(name = "id") Long id){
+    public ResponseEntity<MemberInfo> findMemberById(@PathVariable(name = "id") Long id){
         Member findMember = memberService.findById(id);
-        return new MemberInfo(findMember);
+        MemberInfo result = new MemberInfo(findMember);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Data
@@ -60,23 +64,6 @@ public class MemberController {
         private Address address;
         private String name;
         private String picture;
-    }
-
-    @Data
-    static class CreateResponse {
-        private Long id;
-        private String email;
-        private Role role;
-        private String name;
-        private Address address;
-
-        public CreateResponse(Member member){
-            this.id = member.getMemberId();
-            this.role = member.getRole();
-            this.email = member.getEmail();
-            this.name = member.getName();
-            this.address = member.getAddress();
-        }
     }
 
     @Data

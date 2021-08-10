@@ -43,9 +43,9 @@ class MemberAuthServiceTest {
             .build();
 
         Member saveMember = memberRepository.save(member1);
-        Member findMember = memberRepository.findById(saveMember.getMemberId()).get();
+        Member findMember = memberRepository.findById(saveMember.getId()).get();
 
         Assertions.assertThat(saveMember).isEqualTo(findMember);
-        Assertions.assertThat(saveMember.getMemberId()).isEqualTo(findMember.getMemberId());
+        Assertions.assertThat(saveMember.getId()).isEqualTo(findMember.getId());
     }
 }

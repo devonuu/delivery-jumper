@@ -1,5 +1,6 @@
 package com.deliveryjumper.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,7 +31,8 @@ import lombok.Setter;
 public class Member extends BaseTimeEntity{
     @Id
     @GeneratedValue
-    private Long memberId;
+    @Column(name = "member_id")
+    private Long id;
     private String email;
     private String password;
     private String name;
