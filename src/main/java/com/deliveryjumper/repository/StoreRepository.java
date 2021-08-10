@@ -1,6 +1,8 @@
 package com.deliveryjumper.repository;
 
 import com.deliveryjumper.domain.Store;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,4 +16,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
+    List<Store> findByStoreName(String storeName);
 }
