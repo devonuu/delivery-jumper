@@ -1,6 +1,8 @@
 package com.deliveryjumper.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -34,7 +37,6 @@ import lombok.Setter;
 @Setter(value = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
 public class Order extends BaseTimeEntity{
 
     @Id
@@ -54,6 +56,9 @@ public class Order extends BaseTimeEntity{
     @JoinColumn(name = "deliveryId")
     private Delivery delivery;
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     @Embedded
     private Address address;
 
@@ -61,6 +66,15 @@ public class Order extends BaseTimeEntity{
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    /*
+    * 연관관계 메서드
+    * 객체 그래프로 탐색을 하기 때문에 orderItems와 orderItem 각각에 추가해준다.
+    * */
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+
+    }
 
     private Order(Builder builder){
         id = builder.id;
