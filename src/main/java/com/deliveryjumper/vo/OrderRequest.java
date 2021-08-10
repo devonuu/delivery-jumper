@@ -1,7 +1,6 @@
 package com.deliveryjumper.vo;
 
 import com.deliveryjumper.domain.Address;
-import com.deliveryjumper.domain.OrderItem;
 import java.util.List;
 import lombok.Data;
 
@@ -16,17 +15,19 @@ import lombok.Data;
 
 @Data
 public class OrderRequest {
+
     private Long memberId;
     private Long storeId;
     private Address address;
     private String phoneNumber;
-    private List<ItemRequest> items;
+    private List<OrderItemRequest> orderItemRequests;
 
-    @Data
-    static class ItemRequest {
-        private Long itemId;
-        private String title;
-        private int orderItemQuantity;
-        private double orderItemPrice;
+    public OrderRequest(Long memberId, Long storeId, Address address, String phoneNumber,
+        List<OrderItemRequest> orderItemRequests) {
+        this.memberId = memberId;
+        this.storeId = storeId;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.orderItemRequests = orderItemRequests;
     }
 }
