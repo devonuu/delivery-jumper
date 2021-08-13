@@ -76,6 +76,14 @@ public class Order extends BaseTimeEntity{
 
     }
 
+    /*
+    * 연관관계 메서드
+    * 배달 정보를 생성한다.
+    * */
+    public void createDelivery(Delivery delivery){
+        this.delivery = delivery;
+    }
+
     private Order(Builder builder){
         id = builder.id;
         member = builder.member;
