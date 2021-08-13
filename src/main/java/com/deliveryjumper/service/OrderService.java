@@ -76,6 +76,7 @@ public class OrderService {
             OrderItemRequest orderItemRequest = itemRequests.get(i);
             OrderItem orderItem = new OrderItem.Builder()
                 .item(items.get(orderItemRequest.getItemId()))
+                .title(items.get(orderItemRequest.getItemId()).getTitle())
                 .order(order)
                 .orderItemPrice(orderItemRequest.getOrderItemPrice())
                 .orderItemQuantity(orderItemRequest.getOrderItemQuantity())
