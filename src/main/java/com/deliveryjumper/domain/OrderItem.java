@@ -46,7 +46,6 @@ public class OrderItem {
     private double orderItemPrice;
 
     public OrderItem(Builder builder){
-        id = builder.orderItemId;
         order = builder.order;
         item = builder.item;
         orderItemQuantity = builder.orderItemQuantity;
@@ -54,16 +53,10 @@ public class OrderItem {
     }
 
     public static class Builder{
-        private Long orderItemId;
         private Order order;
         private Item item;
         private int orderItemQuantity;
         private double orderItemPrice;
-
-        public Builder orderItemId(Long orderItemId){
-            this.orderItemId = orderItemId;
-            return this;
-        }
 
         public Builder order(Order order){
             this.order = order;
