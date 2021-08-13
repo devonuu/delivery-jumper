@@ -1,6 +1,8 @@
 package com.deliveryjumper.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Project : delivery-jumper
@@ -12,14 +14,10 @@ import lombok.Data;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItemRequest {
     private Long itemId;
     private int orderItemQuantity;
     private double orderItemPrice;
-
-    public OrderItemRequest(Long itemId, int orderItemQuantity, double orderItemPrice) {
-        this.itemId = itemId;
-        this.orderItemQuantity = orderItemQuantity;
-        this.orderItemPrice = orderItemPrice;
-    }
 }

@@ -2,7 +2,9 @@ package com.deliveryjumper.vo;
 
 import com.deliveryjumper.domain.Address;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Project : delivery-jumper
@@ -14,6 +16,8 @@ import lombok.Data;
  */
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderRequest {
 
     private Long memberId;
@@ -21,13 +25,4 @@ public class OrderRequest {
     private Address address;
     private String phoneNumber;
     private List<OrderItemRequest> orderItemRequests;
-
-    public OrderRequest(Long memberId, Long storeId, Address address, String phoneNumber,
-        List<OrderItemRequest> orderItemRequests) {
-        this.memberId = memberId;
-        this.storeId = storeId;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.orderItemRequests = orderItemRequests;
-    }
 }
