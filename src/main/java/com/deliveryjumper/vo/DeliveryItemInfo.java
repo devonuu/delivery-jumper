@@ -1,5 +1,6 @@
 package com.deliveryjumper.vo;
 
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,5 +15,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DeliveryItemInfo {
+public class DeliveryItemInfo implements Serializable {
+    private String title;
+    private int orderItemQuantity;
+    private double orderItemPrice;
 }

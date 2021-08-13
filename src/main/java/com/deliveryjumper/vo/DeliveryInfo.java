@@ -1,16 +1,11 @@
 package com.deliveryjumper.vo;
 
 import com.deliveryjumper.domain.Address;
-import com.deliveryjumper.domain.Delivery;
 import com.deliveryjumper.domain.DeliveryStatus;
-import com.deliveryjumper.domain.OrderItem;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Project : delivery-jumper
@@ -23,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class DeliveryRequest implements Serializable {
+public class DeliveryInfo implements Serializable {
     private Long deliveryId;
     private Address address;
     private String phoneNumber;
