@@ -40,19 +40,14 @@ public class RedisConfig extends AbstractHttpSessionApplicationInitializer {
     private String password;
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(){
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<byte[], byte[]> redisTemplate(){
+        RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
-        redisTemplate.setEnableTransactionSupport(true);
-
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-
         redisTemplate.afterPropertiesSet();
-
         return redisTemplate;
     }
 
+    @Bean
     public RedisConnectionFactory redisConnectionFactory(){
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(host, port);
         configuration.setPassword(password.isEmpty() ? RedisPassword.none() : RedisPassword.of(password));

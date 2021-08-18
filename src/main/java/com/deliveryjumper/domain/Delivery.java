@@ -1,7 +1,10 @@
 package com.deliveryjumper.domain;
 
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +14,7 @@ import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -25,10 +29,12 @@ import lombok.Setter;
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
 @EqualsAndHashCode
-public class Delivery {
+@NoArgsConstructor
+public class Delivery extends BaseTimeEntity{
     @Id
     @GeneratedValue
-    private Long deliveryId;
+    @Column(name = "delivery_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
@@ -37,6 +43,23 @@ public class Delivery {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "delivery")
     private Order order;  // 배달 대상 주문 id
 
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus deliveryStatus;
+
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+
+    public void startDelivery() {
+        this.deliveryStatus = DeliveryStatus.START;
+        this.startDate = LocalDateTime.now();
+    }
+
+    public void completeDelivery(){
+        this.deliveryStatus = DeliveryStatus.COMP;
+        this.endDate = LocalDateTime.now();
+    }
+
+    public Delivery (DeliveryStatus status){
+        this.deliveryStatus = status;
+    }
 }

@@ -19,13 +19,11 @@ import com.deliveryjumper.repository.StoreRepository;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import org.aspectj.lang.annotation.Before;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -49,13 +47,14 @@ class OrderServiceTest {
     @Autowired CategoryRepository categoryRepository;
     @Autowired ItemRepository itemRepository;
 
-    @BeforeEach
+    //@BeforeEach
     void init(){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         Member host = new Member.Builder()
             .name("host")
             .email("host@host.com")
             .role(Role.ROLE_HOST)
-            .password("1234")
+            .password(encoder.encode("1234"))
             .address(new Address("431", "host", "a host 123"))
             .build();
         memberRepository.save(host);
@@ -86,7 +85,7 @@ class OrderServiceTest {
             .name("userA")
             .email("test@test.com")
             .role(Role.ROLE_CUSTOMER)
-            .password("1234")
+            .password(encoder.encode("1234"))
             .address(new Address("1234", "city", "a road 123"))
             .build();
         memberRepository.save(member);

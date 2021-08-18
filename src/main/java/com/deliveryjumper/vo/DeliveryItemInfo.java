@@ -1,23 +1,22 @@
 package com.deliveryjumper.vo;
 
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Project : delivery-jumper
  * Created by gonuu
- * Date : 2021-08-09
- * Time : 오전 9:58
+ * Date : 2021-08-12
+ * Time : 오전 11:56
  * Blog : http://devonuu.tistory.com
  * Github : http://github.com/devonuu
  */
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class OrderItemRequest {
-    private Long itemId;
+@Builder
+public class DeliveryItemInfo implements Serializable {
+    private String title;
     private int orderItemQuantity;
     private double orderItemPrice;
 }

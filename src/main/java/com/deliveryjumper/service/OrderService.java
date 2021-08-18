@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,6 +76,7 @@ public class OrderService {
             OrderItemRequest orderItemRequest = itemRequests.get(i);
             OrderItem orderItem = new OrderItem.Builder()
                 .item(items.get(orderItemRequest.getItemId()))
+                .title(items.get(orderItemRequest.getItemId()).getTitle())
                 .order(order)
                 .orderItemPrice(orderItemRequest.getOrderItemPrice())
                 .orderItemQuantity(orderItemRequest.getOrderItemQuantity())

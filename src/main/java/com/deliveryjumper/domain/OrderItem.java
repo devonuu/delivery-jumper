@@ -42,26 +42,27 @@ public class OrderItem {
     @JoinColumn(name = "itemId")
     private Item item;
 
+    private String title;
     private int orderItemQuantity;
     private double orderItemPrice;
 
     public OrderItem(Builder builder){
-        id = builder.orderItemId;
         order = builder.order;
         item = builder.item;
+        title = builder.title;
         orderItemQuantity = builder.orderItemQuantity;
         orderItemPrice = builder.orderItemPrice;
     }
 
     public static class Builder{
-        private Long orderItemId;
         private Order order;
         private Item item;
+        private String title;
         private int orderItemQuantity;
         private double orderItemPrice;
 
-        public Builder orderItemId(Long orderItemId){
-            this.orderItemId = orderItemId;
+        public Builder title(String title){
+            this.title = title;
             return this;
         }
 

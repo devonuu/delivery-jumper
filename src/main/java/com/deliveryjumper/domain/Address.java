@@ -1,5 +1,6 @@
 package com.deliveryjumper.domain;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Setter(value = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class Address implements Serializable {
     private String zipcode;
     private String address;
     private String detailAddress;
